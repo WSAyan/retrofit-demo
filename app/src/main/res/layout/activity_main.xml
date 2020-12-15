@@ -9,13 +9,33 @@
         android:padding="20dp"
         tools:context=".MainActivity">
 
+        <Button
+            android:id="@+id/retrofitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/load_with_retrofit"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/fuelButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/load_with_fuel"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/retrofitButton" />
+
         <ImageView
             android:id="@+id/ppImageView"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_marginTop="25dp"
+            android:contentDescription="@null"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/fuelButton" />
 
         <TextView
             android:id="@+id/nameTextView"
@@ -33,11 +53,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            tools:text="asdsa@sdaas.com"
             android:textSize="14sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nameTextView" />
+            app:layout_constraintTop_toBottomOf="@id/nameTextView"
+            tools:text="asdsa@sdaas.com" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
