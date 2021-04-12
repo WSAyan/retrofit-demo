@@ -7,5 +7,5 @@ import retrofit2.http.Query
 
 interface ApiInterface {
     @GET("api/users/2")
-    fun getUserInfo(): Call<BaseResponse?>?
+    suspend fun getUserInfo(): BaseResponse?
 }

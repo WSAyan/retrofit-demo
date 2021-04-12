@@ -9,9 +9,11 @@ import com.github.kittinunf.fuel.httpGet
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import com.wsayan.retrofitdemo.databinding.ActivityMainBinding
+import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -33,7 +35,25 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadUserInfoWithRetrofit() {
         clearFields()
-        val call: Call<BaseResponse?>? = apiInterface?.getUserInfo()
+
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = apiInterface?.getUserInfo()
+            withContext(Dispatchers.Main) {
+                try {
+                    val data = response?.data
+                    Picasso.get()
+                        .load(data?.avatar)
+                        .into(binding.ppImageView);
+                    binding.nameTextView.text = "${data?.first_name} ${data?.last_name}"
+                    binding.emailTextView.text = data?.email
+                } catch (e: Exception) {
+
+                }
+            }
+        }
+
+       /* val call: Call<BaseResponse?>? = apiInterface?.getUserInfo()
         call?.enqueue(object : Callback<BaseResponse?> {
             override fun onResponse(call: Call<BaseResponse?>, response: Response<BaseResponse?>) {
                 val data = response.body()?.data
@@ -48,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                 val throwable = t
                 Log.wtf(TAG, t.message)
             }
-        })
+        })*/
     }
 
     private fun loadUserInfoWithFuel() {
